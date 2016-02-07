@@ -30,10 +30,15 @@ public class DynamicCameraMotionMode implements Runnable {
 	public int angleOfView;
 
 	public DynamicCameraMotionMode() {
-		this(60, "COM5");
+		this("COM5", 60);
 	}
 	
-	public DynamicCameraMotionMode(int angleOfView, String serialPortStr) {
+	public DynamicCameraMotionMode(String comPortStr) {
+		this(comPortStr, 60);
+	}
+	
+	public DynamicCameraMotionMode(String serialPortStr, int angleOfView) {
+		System.out.printf("Starting with serial com port %s and angle of view %d...\n", serialPortStr, angleOfView);
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		this.angleOfView = angleOfView;
 		servoControl = new ServoControl(serialPortStr);
